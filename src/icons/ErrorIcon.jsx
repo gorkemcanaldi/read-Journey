@@ -1,3 +1,5 @@
+import React from "react";
+
 function ErrorIcon() {
   return (
     <svg
@@ -7,7 +9,7 @@ function ErrorIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_18803_151)">
+      <g clipPath="url(#clip0_18803_151)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

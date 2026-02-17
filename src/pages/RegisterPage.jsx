@@ -11,6 +11,8 @@ import ErrorIcon from "../icons/ErrorIcon.jsx";
 import EyeIcon from "../icons/EyeIcon.jsx";
 import { useNavigate } from "react-router-dom";
 import Logo from "../icons/logo.jsx";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/authSlice.js";
 
 function RegisterPage() {
   const {
@@ -26,14 +28,16 @@ function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const hasError = !!errors.password;
   const isValid = passwordValue?.length > 0 && !errors.password;
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       const token = await registerUser(data.email.trim(), data.password);
       console.log(token);
+      dispatch(setUser({ user: data.email, token }));
       toast.success("Kayıt başarılı :)");
+      navigate("/recommended");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         toast.error("Bu email ile zaten kayıt var");
@@ -115,6 +119,7 @@ function RegisterPage() {
                 Registration
               </button>
               <button
+                type="button"
                 className={style.navig}
                 onClick={() => navigate("/login")}
               >

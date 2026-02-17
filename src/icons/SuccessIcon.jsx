@@ -9,7 +9,7 @@ function SuccessIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_18803_177)">
+      <g clipPath="url(#clip0_18803_177)">
         <path
           d="M9.3752 13.6L6 9.79955L7.1248 8.53333L9.3752 11.0658L13.8744 6L15 7.26711L9.3752 13.5982V13.6Z"
           fill="#30B94D"
