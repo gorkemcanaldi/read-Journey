@@ -6,6 +6,7 @@ import RecommendedPage from "../pages/RecommendedPage";
 import LibraryPage from "../pages/LibraryPage";
 import ReadingPage from "../pages/ReadingPage";
 import PrivateRoute from "./PrivateRoute";
+import Header from "../components/Header/Header";
 
 function AppRouter() {
   return (
@@ -13,30 +14,11 @@ function AppRouter() {
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route
-        path="/recommended"
-        element={
-          <PrivateRoute>
-            <RecommendedPage />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/library"
-        element={
-          <PrivateRoute>
-            <LibraryPage />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/reading"
-        element={
-          <PrivateRoute>
-            <ReadingPage />
-          </PrivateRoute>
-        }
-      />
+      <Route element={<PrivateRoute />}>
+        <Route path="/recommended" element={<RecommendedPage />} />
+        <Route path="/library" element={<LibraryPage />} />
+        <Route path="/reading" element={<ReadingPage />} />
+      </Route>
     </Routes>
   );
 }

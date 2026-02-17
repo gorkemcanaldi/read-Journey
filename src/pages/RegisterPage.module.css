@@ -209,6 +209,10 @@
   border: none;
   cursor: pointer;
   background: #1f1f1f;
+  transition: color 0.4s ease;
+}
+.navig:hover {
+  color: #f9f9f9;
 }
 
 .navs {

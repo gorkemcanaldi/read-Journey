@@ -10,7 +10,7 @@ import EyeOffIcon from "../icons/EyeOffIcon.jsx";
 import ErrorIcon from "../icons/ErrorIcon.jsx";
 import EyeIcon from "../icons/EyeIcon.jsx";
 import { useNavigate } from "react-router-dom";
-import Logo from "../icons/logo.jsx";
+import Logo from "../icons/Logo.jsx";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/authSlice.js";
 
@@ -33,9 +33,12 @@ function RegisterPage() {
 
   const onSubmit = async (data) => {
     try {
-      const token = await registerUser(data.email.trim(), data.password);
-      console.log(token);
-      dispatch(setUser({ user: data.email, token }));
+      const token = await registerUser(
+        data.email.trim(),
+        data.password,
+        data.name,
+      );
+      dispatch(setUser(token));
       toast.success("Kayıt başarılı :)");
       navigate("/recommended");
     } catch (error) {

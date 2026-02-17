@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./config.js";
@@ -16,7 +17,13 @@ export const registerUser = async (email, password, name) => {
   });
 
   const token = await userCredential.user.getIdToken();
-  return token;
+  return {
+    token,
+    user: {
+      name: userCredential.user.displayName,
+      email: userCredential.user.email,
+    },
+  };
 };
 
 export const loginUser = async (email, password) => {
@@ -26,5 +33,16 @@ export const loginUser = async (email, password) => {
     password,
   );
   const token = await userCredential.user.getIdToken();
-  return token;
+  console.log("LOGIN DISPLAY NAME:", userCredential.user.displayName);
+  return {
+    token,
+    user: {
+      name: userCredential.user.displayName,
+      email: userCredential.user.email,
+    },
+  };
+};
+
+export const logoutUser = async () => {
+  await signOut(auth);
 };

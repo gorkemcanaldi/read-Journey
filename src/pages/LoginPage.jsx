@@ -10,9 +10,7 @@ import EyeOffIcon from "../icons/EyeOffIcon.jsx";
 import ErrorIcon from "../icons/ErrorIcon.jsx";
 import EyeIcon from "../icons/EyeIcon.jsx";
 import { useNavigate } from "react-router-dom";
-import Logo from "../icons/logo.jsx";
-import { useDispatch } from "react-redux";
-import { setUser } from "../redux/authSlice.js";
+import Logo from "../icons/Logo.jsx";
 
 function LoginPage() {
   const {
@@ -28,14 +26,11 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const hasError = !!errors.password;
   const isValid = passwordValue?.length > 0 && !errors.password;
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const token = await loginUser(data.email.trim(), data.password);
-      console.log(token);
-      dispatch(setUser({ user: data.email, token }));
+      await loginUser(data.email.trim(), data.password);
       toast.success("Giriş başarılı :)");
       navigate("/recommended");
     } catch (error) {
