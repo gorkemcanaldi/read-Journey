@@ -1,38 +1,43 @@
 import "./App.css";
 import Header from "./components/Header/Header";
 import AppRouter from "./routes/AppRouter";
+import RecommendedPage from "./pages/RecommendedPage";
 import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase/config";
+import { getCurrentUser, refreshUserToken } from "./api/services";
 import { useDispatch } from "react-redux";
-import { setUser, logout, setLoading } from "./redux/authSlice";
+import { setCredentials, setLoading } from "./redux/authSlice";
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      console.log("AUTH USER:", user);
-      console.log("DISPLAY NAME:", user?.displayName);
-      if (user) {
-        const token = await user.getIdToken();
-
-        dispatch(
-          setUser({
-            user: {
-              name: user.displayName,
-              email: user.email,
-            },
-            token,
-          }),
-        );
-      } else {
-        dispatch(logout());
+    const initAuth = async () => {
+      dispatch(setLoading(true));
+      const token = localStorage.getItem("token") || null;
+      const refreshToken = localStorage.getItem("refreshToken") || null;
+      if (!token) {
+        dispatch(setLoading(true));
+        return;
       }
-      dispatch(setLoading(false));
-    });
-
-    return () => unsubscribe();
+      try {
+        const user = await getCurrentUser(token);
+        dispatch(setCredentials(user));
+      } catch {
+        try {
+          const newTokens = await refreshUserToken(refreshToken);
+          localStorage.setItem("token", newTokens.token);
+          localStorage.setItem("refreshToken", newTokens.refreshToken);
+          const user = await getCurrentUser(newTokens.token);
+          dispatch(setCredentials(user));
+        } catch {
+          localStorage.clear();
+        }
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+    initAuth();
   }, []);
+
   return (
     <>
       <Header />

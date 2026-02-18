@@ -6,12 +6,10 @@ import RecommendedPage from "../pages/RecommendedPage";
 import LibraryPage from "../pages/LibraryPage";
 import ReadingPage from "../pages/ReadingPage";
 import PrivateRoute from "./PrivateRoute";
-import Header from "../components/Header/Header";
 
 function AppRouter() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route element={<PrivateRoute />}>

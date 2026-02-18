@@ -1,4 +1,3 @@
-import { registerUser } from "../firebase/authService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../validation/validateSchema.js";
@@ -12,7 +11,8 @@ import EyeIcon from "../icons/EyeIcon.jsx";
 import { useNavigate } from "react-router-dom";
 import Logo from "../icons/Logo.jsx";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/authSlice.js";
+import { setCredentials, setError, setLoading } from "../redux/authSlice.js";
+import { registerUser } from "../api/services.js";
 
 function RegisterPage() {
   const {
@@ -31,23 +31,21 @@ function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (val) => {
     try {
-      const token = await registerUser(
-        data.email.trim(),
-        data.password,
-        data.name,
-      );
-      dispatch(setUser(token));
-      toast.success("Kayıt başarılı :)");
+      dispatch(setLoading(true));
+      const data = await registerUser(val);
+      dispatch(setCredentials(data));
+      toast.success("Kayıt başarılı.");
       navigate("/recommended");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      console.log(data);
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        toast.error("Bu email ile zaten kayıt var");
-      } else {
-        toast.error("Kayıt başarısız");
-      }
-      console.log(error.code);
+      dispatch(setError(error.message));
+      toast.error(error.message);
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -77,6 +75,7 @@ function RegisterPage() {
                 className={style.form_input}
                 type="email"
                 {...register("email")}
+                autoComplete="username"
               />
             </div>
             <p className={style.error_text}>{errors.email?.message}</p>

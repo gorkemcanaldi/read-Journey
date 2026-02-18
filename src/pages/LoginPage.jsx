@@ -1,4 +1,3 @@
-import { loginUser } from "../firebase/authService";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../validation/validateSchema.js";
@@ -11,6 +10,9 @@ import ErrorIcon from "../icons/ErrorIcon.jsx";
 import EyeIcon from "../icons/EyeIcon.jsx";
 import { useNavigate } from "react-router-dom";
 import Logo from "../icons/Logo.jsx";
+import { useDispatch } from "react-redux";
+import { setCredentials, setError, setLoading } from "../redux/authSlice.js";
+import { loginUser } from "../api/services.js";
 
 function LoginPage() {
   const {
@@ -22,26 +24,29 @@ function LoginPage() {
     resolver: yupResolver(loginSchema),
     mode: "onChange",
   });
+
   const passwordValue = watch("password");
   const [showPassword, setShowPassword] = useState(false);
   const hasError = !!errors.password;
   const isValid = passwordValue?.length > 0 && !errors.password;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (val) => {
     try {
-      await loginUser(data.email.trim(), data.password);
-      toast.success("Giriş başarılı :)");
+      dispatch(setLoading(true));
+      const data = await loginUser(val);
+      dispatch(setCredentials(data));
+      toast.success("Giriş başarılı.");
       navigate("/recommended");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      console.log(data);
     } catch (error) {
-      if (error.code === "auth/wrong-password") {
-        toast.error("Parola yanlış");
-      } else if (error.code === "auth/user-not-found") {
-        toast.error("Böyle bir kullanıcı yok");
-      } else {
-        toast.error("Giriş başarısız");
-      }
-      console.log(error.code);
+      dispatch(setError(error.message));
+      toast.error(error.message);
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -65,6 +70,7 @@ function LoginPage() {
                 className={style.form_input}
                 type="email"
                 {...register("email")}
+                autoComplete="username"
               />
             </div>
             <p className={style.error_text}>{errors.email?.message}</p>

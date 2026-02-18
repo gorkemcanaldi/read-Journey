@@ -33,7 +33,6 @@ export const loginUser = async (email, password) => {
     password,
   );
   const token = await userCredential.user.getIdToken();
-  console.log("LOGIN DISPLAY NAME:", userCredential.user.displayName);
   return {
     token,
     user: {

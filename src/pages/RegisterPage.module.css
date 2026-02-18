@@ -88,6 +88,10 @@
   border: none;
   outline: none;
 }
+
+.form_input:focus {
+  background: #262626;
+}
 .input_label {
   position: absolute;
   left: 14px;
