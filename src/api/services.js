@@ -59,3 +59,26 @@ export const refreshUserToken = async (refreshToken) => {
   }
   return data;
 };
+
+export const getRecommendBooks = async (
+  token,
+  { title, author, page = 1, limit = 10 } = {},
+) => {
+  const query = new URLSearchParams();
+  if (title) query.append("title", title);
+  if (author) query.append("author", author);
+
+  query.append("page", page);
+  query.append("limit", limit);
+
+  const res = await fetch(`${BASE_URL}/books/recommend?${query.toString()}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = res.json();
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to fetch recommended books");
+  }
+  return data;
+};

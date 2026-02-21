@@ -1,0 +1,110 @@
+.img_div {
+  width: 137px;
+  height: 208px;
+  border-radius: 8px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  margin-top: 8px;
+  width: 137px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.author {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #686868;
+  margin-top: 2px;
+}
+
+.rec_card {
+  display: flex;
+  flex-direction: column;
+  width: 137px;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  padding-left: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.rec_tit {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 114%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+}
+
+.rec_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.rec_right {
+  width: 847px;
+  height: 651px;
+  background-color: #1f1f1f;
+  border-radius: 30px;
+}
+
+.left_ {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  background-color: #262626;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: color 0.4s ease;
+  font-size: 20px;
+  color: #f9f9f9;
+}
+
+.right_ {
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  background-color: #262626;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #f9f9f9;
+}
+.right_:disabled {
+  color: rgba(249, 249, 249, 0.2);
+}
+.left_:disabled {
+  color: rgba(249, 249, 249, 0.2);
+}
+
+.but_div {
+  display: flex;
+  gap: 8px;
+}
+
+.rec {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
