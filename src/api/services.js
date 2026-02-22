@@ -13,7 +13,6 @@ export const loginUser = async ({ email, password }) => {
   if (!res.ok) {
     throw new Error(data.message || "Login failed");
   }
-  console.log(data);
   return data;
 };
 
@@ -30,7 +29,6 @@ export const registerUser = async ({ name, email, password }) => {
   if (!res.ok) {
     throw new Error(data.message || "register failed");
   }
-  console.log(data);
   return data;
 };
 
@@ -76,9 +74,38 @@ export const getRecommendBooks = async (
       Authorization: `Bearer ${token}`,
     },
   });
-  const data = res.json();
+  const data = await res.json();
   if (!res.ok) {
     throw new Error(data.message || "Failed to fetch recommended books");
   }
   return data;
+};
+
+export const getOwnBooks = async (token) => {
+  const res = await fetch(`${BASE_URL}/books/own`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to fetch own books");
+  }
+  return data;
+};
+
+export const addBook = async (token, id) => {
+  const res = await fetch(`${BASE_URL}/books/add/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to add book");
+  }
+
+  return res.json();
 };

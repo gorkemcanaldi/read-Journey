@@ -54,7 +54,7 @@
 
 .input_label {
   position: absolute;
-  left: 18px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: #686868;
@@ -85,7 +85,7 @@
   background-color: #1f1f1f;
   border: 1px solid rgba(249, 249, 249, 0.2);
   border-radius: 30px;
-  width: 122px;
+  width: 131px;
   height: 42px;
   transition: background-color 0.4s ease;
   cursor: pointer;

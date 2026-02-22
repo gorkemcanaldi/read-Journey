@@ -1,17 +1,36 @@
 import React from "react";
 import style from "./Filters.module.css";
 import Back from "../../icons/Back";
-function Filters() {
+import { useNavigate } from "react-router-dom";
+function Filters({ setAppliedFilters, setFormFilters, formFilters, setPage }) {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const cleanedFilters = {
+      title: formFilters.title.trim(),
+      author: formFilters.author.trim(),
+    };
+    setPage(1);
+    setAppliedFilters(cleanedFilters);
+  };
+
   return (
     <div className={style.filters}>
-      <form className={style.rec_form}>
+      <form onSubmit={handleSubmit} className={style.rec_form}>
         <p className={style.fil}>Filters:</p>
 
         <div className={style.input_group}>
           <label className={style.input_label}>Book title:</label>
           <input
+            value={formFilters.title}
+            onChange={(e) =>
+              setFormFilters((b) => ({
+                ...b,
+                title: e.target.value,
+              }))
+            }
             className={style.form_input}
-            required
             placeholder="Enter text"
             type="text"
           />
@@ -19,8 +38,14 @@ function Filters() {
         <div className={style.input_group}>
           <label className={style.input_label}>The author:</label>
           <input
+            value={formFilters.author}
+            onChange={(e) =>
+              setFormFilters((b) => ({
+                ...b,
+                author: e.target.value,
+              }))
+            }
             className={style.form_input_}
-            required
             placeholder="Enter text"
             type="text"
           />
@@ -46,7 +71,10 @@ function Filters() {
             <span>define a goal, choose a period, start training.</span>
           </p>
         </div>
-        <div className={style.lib_navigate_div}>
+        <div
+          onClick={() => navigate("/library")}
+          className={style.lib_navigate_div}
+        >
           <button className={style.mylib_button}>My Library</button>
           <Back />
         </div>
