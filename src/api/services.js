@@ -1,4 +1,4 @@
-const BASE_URL = "https://readjourney.b.goit.study/api";
+export const BASE_URL = "https://readjourney.b.goit.study/api";
 
 export const loginUser = async ({ email, password }) => {
   const res = await fetch(`${BASE_URL}/users/signin`, {

@@ -4,7 +4,6 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice.js";
 import Logo from "../../icons/Logo.jsx";
 import style from "./Header.module.css";
-import { logoutUser } from "../../firebase/authService.js";
 
 function Header() {
   const dispatch = useDispatch();
@@ -18,8 +17,7 @@ function Header() {
   if (location.pathname === "/login" || location.pathname === "/register")
     return null;
   const handleLogout = async () => {
-    await logoutUser(); // Firebase session kapanır
-    dispatch(logout()); // Redux temizlenir
+    dispatch(logout());
     navigate("/login");
   };
 

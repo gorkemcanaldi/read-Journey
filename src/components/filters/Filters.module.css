@@ -125,7 +125,7 @@
   margin-right: 84px;
 }
 
-p {
+.start_p {
   font-weight: 500;
   font-size: 14px;
   line-height: 129%;
@@ -134,7 +134,7 @@ p {
   width: 220px;
 }
 
-span {
+.start_span {
   color: #686868;
   padding-left: 5px;
 }

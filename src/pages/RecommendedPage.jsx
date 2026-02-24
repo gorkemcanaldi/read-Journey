@@ -74,7 +74,7 @@ function RecommendedPage() {
     }
   }, [token]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
   if (error) return <p>Error: {error}</p>;
   const isAlreadyAdded = selectedBook && libraryIds.includes(selectedBook._id);
 
@@ -83,6 +83,7 @@ function RecommendedPage() {
       <div className={style.rec}>
         <div>
           <Filters
+            currentPage={page}
             formFilters={formFilters}
             setFormFilters={setFormFilters}
             setAppliedFilters={setAppliedFilters}

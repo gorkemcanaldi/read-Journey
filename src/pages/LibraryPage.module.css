@@ -16,6 +16,8 @@
 }
 
 .lib_right {
+  display: flex;
+  flex-direction: column;
   width: 847px;
   height: 651px;
   background-color: #1f1f1f;
@@ -124,4 +126,158 @@
 .form_button:hover {
   background-color: #f9f9f9;
   color: #1f1f1f;
+}
+
+.title_lib {
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #e3e3e3;
+  margin-top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 71px;
+}
+
+.author_lib {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #686868;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.img_div_lib {
+  border-radius: 8px;
+  width: 71px;
+  height: 107px;
+}
+
+.rec_card_lib {
+  display: flex;
+  flex-direction: column;
+  width: 71px;
+  flex-wrap: nowrap;
+}
+
+.libbbb {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.lib_head_Re {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #e3e3e3;
+}
+
+.lib_navigate_div {
+  display: flex;
+  gap: 189px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.mylib_button {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #686868;
+  background-color: #262626;
+  border: none;
+  cursor: pointer;
+}
+
+.lib_filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.img_div {
+  width: 137px;
+  height: 208px;
+  border-radius: 8px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.author {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #686868;
+}
+
+.rec_card {
+  display: flex;
+  flex-direction: column;
+  width: 137px;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  padding-left: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.rec_tit {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 114%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+}
+
+.mylib_del {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rub_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  background-color: rgba(232, 80, 80, 0.1);
+  border: 1px solid rgba(232, 80, 80, 0.2);
+}
+
+.span_div {
+  display: flex;
+  flex-direction: column;
+  width: 89px;
+  margin-top: 8px;
+  gap: 2px;
 }

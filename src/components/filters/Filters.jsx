@@ -2,7 +2,13 @@ import React from "react";
 import style from "./Filters.module.css";
 import Back from "../../icons/Back";
 import { useNavigate } from "react-router-dom";
-function Filters({ setAppliedFilters, setFormFilters, formFilters, setPage }) {
+function Filters({
+  setAppliedFilters,
+  setFormFilters,
+  formFilters,
+  setPage,
+  currentPage,
+}) {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -59,20 +65,28 @@ function Filters({ setAppliedFilters, setFormFilters, formFilters, setPage }) {
         <h3 className={style.start_h3}>Start your workout</h3>
         <div className={style.div_ru_text}>
           <div className={style.div_ru}>1</div>
-          <p>
+          <p className={style.start_p}>
             Create a personal library:
-            <span>add the books you intend to read to it</span>
+            <span className={style.start_span}>
+              add the books you intend to read to it
+            </span>
           </p>
         </div>
         <div className={style.div_ru_text}>
           <div className={style.div_ru}>2</div>
-          <p>
+          <p className={style.start_p}>
             Create your first workout:
-            <span>define a goal, choose a period, start training.</span>
+            <span className={style.start_span}>
+              define a goal, choose a period, start training.
+            </span>
           </p>
         </div>
         <div
-          onClick={() => navigate("/library")}
+          onClick={() =>
+            navigate("/library", {
+              state: { currentPage },
+            })
+          }
           className={style.lib_navigate_div}
         >
           <button className={style.mylib_button}>My Library</button>
