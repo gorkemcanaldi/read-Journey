@@ -281,3 +281,75 @@
   margin-top: 8px;
   gap: 2px;
 }
+.like_div {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.like_modal {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.like {
+  width: 68px;
+  height: 70px;
+}
+
+.like_span {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #686868;
+}
+
+.like_spann {
+  color: #f9f9f9;
+}
+
+.like_p {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #f9f9f9;
+}
+
+.m_close_like {
+  cursor: pointer;
+  background: #1f1f1f;
+  color: #f9f9f9;
+  border: none;
+  font-size: 22px;
+  transform: border 0.4s ease;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+.m_close_like:hover {
+  border: 1px solid rgba(249, 249, 249, 0.2);
+}
+.like_ {
+  width: 242px;
+}
+
+.form_input::placeholder {
+  color: #f9f9f9;
+}
+
+.form_input_::placeholder {
+  color: #f9f9f9;
+}
+.form_input__::placeholder {
+  color: #f9f9f9;
+}

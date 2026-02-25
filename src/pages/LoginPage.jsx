@@ -71,6 +71,7 @@ function LoginPage() {
                 type="email"
                 {...register("email")}
                 autoComplete="username"
+                placeholder="Your@email.com"
               />
             </div>
             <p className={style.error_text}>{errors.email?.message}</p>
@@ -85,6 +86,7 @@ function LoginPage() {
                ${hasError ? style.error : ""}
                ${isValid ? style.success : ""}`}
                   {...register("password")}
+                  placeholder="Yourpasswordhere"
                 />
 
                 <span className={style.iconContainer}>

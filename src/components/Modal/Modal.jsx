@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import style from "./Modal.module.css";
 
-function Modal({ isOpen, onClose, children }) {
+function Modal({ isOpen, onClose, children, variant = "default" }) {
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Escape") {
@@ -18,7 +18,12 @@ function Modal({ isOpen, onClose, children }) {
   if (!isOpen) return null;
   return (
     <div onClick={onClose} className={style.modal_overlay}>
-      <div onClick={(e) => e.stopPropagation()} className={style.modal_content}>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`${style.modal_content} ${
+          variant === "success" ? style.modal_success : ""
+        }`}
+      >
         {children}
       </div>
     </div>

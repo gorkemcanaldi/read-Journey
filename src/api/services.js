@@ -109,3 +109,17 @@ export const addBook = async (token, id) => {
 
   return res.json();
 };
+
+export const removeBook = async (token, id) => {
+  const res = await fetch(`${BASE_URL}/books/remove/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to delete book");
+  }
+  return res.json();
+};

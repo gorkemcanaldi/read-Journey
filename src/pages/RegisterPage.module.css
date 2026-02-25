@@ -88,6 +88,9 @@
   border: none;
   outline: none;
 }
+.form_input::placeholder {
+  color: #f9f9f9;
+}
 
 .form_input:focus {
   background: #262626;
@@ -123,6 +126,9 @@
   border: none;
   background: #262626;
   outline: none;
+}
+.form_input2::placeholder {
+  color: #f9f9f9;
 }
 
 .form {

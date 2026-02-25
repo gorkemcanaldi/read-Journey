@@ -146,8 +146,10 @@
 }
 
 .m_close_div {
-  margin-top: 16px;
-  margin-left: 440px;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 16px;
+  padding-top: 16px;
 }
 
 .m_close {
@@ -190,4 +192,32 @@
 .lib_nav:hover {
   background-color: #f9f9f9;
   color: #1f1f1f;
+}
+
+.oops_container {
+  display: flex;
+  justify-content: center;
+}
+
+.m_close_ops {
+  cursor: pointer;
+  background: #1f1f1f;
+  color: #f9f9f9;
+  border: none;
+  font-size: 22px;
+  transform: border 0.4s ease;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  margin-left: 35px;
+}
+
+.m_close_ops:hover {
+  border: 1px solid rgba(249, 249, 249, 0.2);
+}
+.rec_divv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

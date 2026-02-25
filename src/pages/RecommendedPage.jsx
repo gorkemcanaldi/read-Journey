@@ -16,7 +16,7 @@ function RecommendedPage() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedBook, setSelectedBook] = useState(null);
-  const [libraryIds, setLibraryIds] = useState([]);
+  const [libraryBooks, setLibraryBooks] = useState([]);
   const [addSuccess, setAddSuccess] = useState(false);
   const [formFilters, setFormFilters] = useState({
     title: "",
@@ -30,7 +30,7 @@ function RecommendedPage() {
     try {
       const data = await addBook(token, selectedBook._id);
       setAddSuccess(true);
-      navigate("/library");
+      navigate("/library", { state: { justAdded: true } });
     } catch (error) {
       console.error(error);
     }
@@ -62,8 +62,8 @@ function RecommendedPage() {
     const fetchLibrary = async () => {
       try {
         const data = await getOwnBooks(token);
-
-        console.log("FULL LIBRARY DATA:", data);
+        const books = data.results || data;
+        setLibraryBooks(books);
       } catch (error) {
         console.error(error);
       }
@@ -76,7 +76,11 @@ function RecommendedPage() {
 
   if (loading) return;
   if (error) return <p>Error: {error}</p>;
-  const isAlreadyAdded = selectedBook && libraryIds.includes(selectedBook._id);
+  const isAlreadyAdded =
+    selectedBook &&
+    libraryBooks.some(
+      (b) => b.title === selectedBook.title && b.author === selectedBook.author,
+    );
 
   return (
     <>
@@ -114,7 +118,11 @@ function RecommendedPage() {
           <div className={style.card}>
             {books.map((s) => (
               <div
-                onClick={() => setSelectedBook(s)}
+                onClick={() => {
+                  setSelectedBook(s);
+                  setAddSuccess(false);
+                  console.log("RECOMMENDED BOOK:", s);
+                }}
                 className={style.rec_card}
                 key={s._id}
               >
@@ -128,8 +136,18 @@ function RecommendedPage() {
       </div>
 
       {selectedBook && (
-        <Modal isOpen={selectedBook} onClose={() => setSelectedBook(null)}>
-          {addSuccess ? (
+        <Modal isOpen={!!selectedBook} onClose={() => setSelectedBook(null)}>
+          {isAlreadyAdded ? (
+            <div className={style.oops_container}>
+              <img src="/ops.png" width={400} height={400} alt="Oops" />
+              <button
+                className={style.m_close_ops}
+                onClick={() => setSelectedBook(null)}
+              >
+                X
+              </button>
+            </div>
+          ) : addSuccess ? (
             <div className={style.successWrapper}>
               <div className={style.m_close_div}>
                 <button
@@ -139,21 +157,8 @@ function RecommendedPage() {
                   X
                 </button>
               </div>
-              <img src="/like-image.png" alt="Added to library" />
+              <img src="/like.png" alt="Added to library" />
               <p>Added to your library!</p>
-            </div>
-          ) : isAlreadyAdded ? (
-            <div className={style.oops_container}>
-              <button
-                className={style.m_close}
-                onClick={() => setSelectedBook(null)}
-              >
-                X
-              </button>
-              <img src="/oops-image.png" alt="Oops" />
-              <p className={style.already}>
-                Oops, this book is already in your library
-              </p>
             </div>
           ) : (
             <>
@@ -165,24 +170,25 @@ function RecommendedPage() {
                   X
                 </button>
               </div>
+              <div className={style.rec_divv}>
+                <img
+                  className={style.img_div_m}
+                  src={selectedBook.imageUrl}
+                  alt={selectedBook.title}
+                />
 
-              <img
-                className={style.img_div_m}
-                src={selectedBook.imageUrl}
-                alt={selectedBook.title}
-              />
+                <div className={style.des_div}>
+                  <span className={style.m_title}>{selectedBook.title}</span>
+                  <span className={style.m_author}>{selectedBook.author}</span>
+                  <span className={style.m_totalPages}>
+                    {selectedBook.totalPages} pages
+                  </span>
+                </div>
 
-              <div className={style.des_div}>
-                <span className={style.m_title}>{selectedBook.title}</span>
-                <span className={style.m_author}>{selectedBook.author}</span>
-                <span className={style.m_totalPages}>
-                  {selectedBook.totalPages} pages
-                </span>
+                <button onClick={handleAdd} className={style.lib_nav}>
+                  Add to library
+                </button>
               </div>
-
-              <button onClick={handleAdd} className={style.lib_nav}>
-                Add to library
-              </button>
             </>
           )}
         </Modal>

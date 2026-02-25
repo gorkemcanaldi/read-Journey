@@ -66,7 +66,11 @@ function RegisterPage() {
             <div className={style.input_group}>
               <label className={style.input_label}>Name:</label>
 
-              <input className={style.form_input} {...register("name")} />
+              <input
+                className={style.form_input}
+                placeholder="Ilona Ratushniak"
+                {...register("name")}
+              />
             </div>
             <p className={style.error_text}>{errors.name?.message}</p>
             <div className={style.input_group}>
@@ -75,6 +79,7 @@ function RegisterPage() {
                 className={style.form_input}
                 type="email"
                 {...register("email")}
+                placeholder="Your@email.com"
                 autoComplete="username"
               />
             </div>
@@ -86,6 +91,7 @@ function RegisterPage() {
                 <input
                   type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
+                  placeholder="Yourpasswordhere"
                   className={`${style.form_input2}
                ${hasError ? style.error : ""}
                ${isValid ? style.success : ""}`}

@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import style from "./LibraryPage.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getOwnBooks, getRecommendBooks } from "../api/services";
+import { getOwnBooks, getRecommendBooks, removeBook } from "../api/services";
 import { useSelector } from "react-redux";
 import Back from "../icons/Back";
 import Rubbish from "../icons/rubbish";
+import Modal from "../components/Modal/Modal";
 
 function LibraryPage() {
   const { token } = useSelector((s) => s.auth);
   const location = useLocation();
+  const justAdded = location.state?.justAdded;
   const currentPage = location.state?.currentPage || 1;
   const [books, setBooks] = useState([]);
   const [myBooks, setMyBooks] = useState([]);
+  const [showSuccess, setShowSuccess] = useState(justAdded || false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +47,16 @@ function LibraryPage() {
       libBooks();
     }
   }, [token]);
+
+  const handleRemove = async (id) => {
+    try {
+      const data = await removeBook(token, id);
+      setMyBooks((d) => d.filter((b) => b._id !== data.id));
+      console.log(data.message);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className={style.lib}>
@@ -135,7 +148,10 @@ function LibraryPage() {
                     <span className={style.title}>{book.title}</span>
                     <span className={style.author}>{book.author}</span>
                   </div>
-                  <div className={style.rub_div}>
+                  <div
+                    className={style.rub_div}
+                    onClick={() => handleRemove(book._id)}
+                  >
                     <Rubbish />
                   </div>
                 </div>
@@ -144,6 +160,33 @@ function LibraryPage() {
           )}
         </div>
       </div>
+      {showSuccess && (
+        <Modal
+          isOpen={showSuccess}
+          onClose={() => setShowSuccess(false)}
+          variant="success"
+        >
+          <div className={style.like_modal}>
+            <button
+              className={style.m_close_like}
+              onClick={() => setShowSuccess(null)}
+            >
+              X
+            </button>
+            <div className={style.like_div}>
+              <img src="/like.png" className={style.like} />
+              <div className={style.like_}>
+                <p className={style.like_p}>Good job</p>
+                <span className={style.like_span}>
+                  Your book is now in
+                  <span className={style.like_spann}> the library!</span> The
+                  joy knows no bounds and now you can start your training
+                </span>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
