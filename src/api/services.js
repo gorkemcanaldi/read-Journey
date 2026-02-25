@@ -32,6 +32,24 @@ export const registerUser = async ({ name, email, password }) => {
   return data;
 };
 
+export const logoutUser = async (token) => {
+  const res = await fetch(`${BASE_URL}/users/signout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Logout failed");
+  }
+
+  return data;
+};
+
 export const getCurrentUser = async (token) => {
   const res = await fetch(`${BASE_URL}/users/current`, {
     headers: {
@@ -122,4 +140,21 @@ export const removeBook = async (token, id) => {
     throw new Error("Failed to delete book");
   }
   return res.json();
+};
+
+export const addNewBook = async (token, bookData) => {
+  const res = await fetch(`${BASE_URL}/books/add`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(bookData),
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to add new books");
+  }
+  return data;
 };

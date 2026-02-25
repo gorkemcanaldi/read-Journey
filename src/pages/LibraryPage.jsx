@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from "react";
 import style from "./LibraryPage.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getOwnBooks, getRecommendBooks, removeBook } from "../api/services";
+import {
+  addNewBook,
+  getOwnBooks,
+  getRecommendBooks,
+  removeBook,
+} from "../api/services";
 import { useSelector } from "react-redux";
 import Back from "../icons/Back";
 import Rubbish from "../icons/rubbish";
 import Modal from "../components/Modal/Modal";
+import toast from "react-hot-toast";
 
 function LibraryPage() {
   const { token } = useSelector((s) => s.auth);
   const location = useLocation();
-  const justAdded = location.state?.justAdded;
   const currentPage = location.state?.currentPage || 1;
   const [books, setBooks] = useState([]);
   const [myBooks, setMyBooks] = useState([]);
-  const [showSuccess, setShowSuccess] = useState(justAdded || false);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const [formData, setFormData] = useState({
+    title: "",
+    author: "",
+    totalPages: "",
+  });
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -52,16 +64,45 @@ function LibraryPage() {
     try {
       const data = await removeBook(token, id);
       setMyBooks((d) => d.filter((b) => b._id !== data.id));
-      console.log(data.message);
+      toast.success("You deleted book");
     } catch (error) {
       console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    if (location.state?.justAdded) {
+      Promise.resolve().then(() => setShowSuccess(true));
+
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate]);
+
+  const handleNewBooks = async (e) => {
+    e.preventDefault();
+    setError("");
+    const payload = {
+      title: formData.title.trim(),
+      author: formData.author.trim(),
+      totalPages: Number(formData.totalPages),
+    };
+
+    try {
+      const newBook = await addNewBook(token, payload);
+      setMyBooks((n) => [...n, newBook.book || newBook]);
+      setFormData({
+        title: "",
+        author: "",
+        totalPages: "",
+      });
+    } catch (error) {
+      setError(error.message);
     }
   };
 
   return (
     <div className={style.lib}>
       <div className={style.filters}>
-        <form className={style.lib_form}>
+        <form onSubmit={handleNewBooks} className={style.lib_form}>
           <p className={style.fil}>Create your library:</p>
 
           <div className={style.input_group}>
@@ -69,6 +110,10 @@ function LibraryPage() {
             <input
               className={style.form_input}
               required
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
+              value={formData.title}
               placeholder="Enter text"
               type="text"
             />
@@ -77,7 +122,11 @@ function LibraryPage() {
             <label className={style.input_label}>The author:</label>
             <input
               className={style.form_input_}
+              value={formData.author}
               required
+              onChange={(e) =>
+                setFormData({ ...formData, author: e.target.value })
+              }
               placeholder="Enter text"
               type="text"
             />
@@ -87,7 +136,11 @@ function LibraryPage() {
             <input
               className={style.form_input__}
               required
+              value={formData.totalPages}
               placeholder=" 664"
+              onChange={(e) =>
+                setFormData({ ...formData, totalPages: e.target.value })
+              }
               type="text"
             />
           </div>
@@ -96,7 +149,7 @@ function LibraryPage() {
           </button>
         </form>
 
-        <div>
+        <div className={style.rec_bookss}>
           <p className={style.lib_head_Re}>Recommended books</p>
           <div className={style.libbbb}>
             {books.map((book) => (
@@ -127,13 +180,25 @@ function LibraryPage() {
       <div className={style.lib_right}>
         <div className={style.lib_filter}>
           <p className={style.rec_tit}>My library</p>
-          <input type="option" />
+          <select id="cars" name="cars">
+            <option value="unread">Unread</option>
+            <option value="ınprogress">In progress</option>
+            <option value="done">Done</option>
+            <option value="allBooks">All books</option>
+          </select>
         </div>
 
         <div className={style.card}>
           {myBooks.length === 0 ? (
-            <div>
-              <img src="/books.png" alt="books" />
+            <div className={style.book_div}>
+              <img className={style.book_img} src="/book.png" alt="books" />
+              <span className={style.lib_books_span}>
+                To start training, add{" "}
+                <span className={style.lib_books_spann}>
+                  some of your books
+                </span>{" "}
+                or from the recommended ones
+              </span>
             </div>
           ) : (
             myBooks.map((book) => (
@@ -169,7 +234,7 @@ function LibraryPage() {
           <div className={style.like_modal}>
             <button
               className={style.m_close_like}
-              onClick={() => setShowSuccess(null)}
+              onClick={() => setShowSuccess(false)}
             >
               X
             </button>

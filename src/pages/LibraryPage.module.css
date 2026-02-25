@@ -1,7 +1,7 @@
 .lib {
   display: flex;
   justify-content: center;
-  gap: 6px;
+  gap: 16px;
 }
 
 .filters {
@@ -178,13 +178,26 @@
   line-height: 100%;
   letter-spacing: -0.02em;
   color: #e3e3e3;
+  text-align: start;
+  margin-right: 35px;
 }
 
 .lib_navigate_div {
   display: flex;
   gap: 189px;
-  margin-top: 6px;
+  margin-top: 20px;
   cursor: pointer;
+}
+
+.rec_bookss {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  margin-top: 58px;
+  width: 313px;
+  height: 259px;
+  background: #262626;
 }
 
 .mylib_button {
@@ -204,7 +217,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 40px;
+  padding: 0px 40px;
 }
 
 .img_div {
@@ -245,7 +258,8 @@
 
 .card {
   display: flex;
-  padding-left: 40px;
+  padding: 40px;
+  justify-items: center;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -351,5 +365,53 @@
   color: #f9f9f9;
 }
 .form_input__::placeholder {
+  color: #f9f9f9;
+}
+
+.lib_books_span {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #f9f9f9;
+}
+
+.lib_books_spann {
+  color: #686868;
+}
+
+.book_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 247px;
+  margin-top: 129px;
+  width: 274px;
+}
+.book_img {
+  width: 130px;
+  height: 130px;
+}
+
+select {
+  border: 1px solid #3e3e3e;
+  border-radius: 12px;
+  padding: 14px;
+  width: 153px;
+  height: 46px;
+  color: #f9f9f9;
+  background-color: #1f1f1f;
+}
+option {
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #686868;
+}
+
+option:focus {
   color: #f9f9f9;
 }

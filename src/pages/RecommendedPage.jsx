@@ -28,7 +28,8 @@ function RecommendedPage() {
   });
   const handleAdd = async () => {
     try {
-      const data = await addBook(token, selectedBook._id);
+      await addBook(token, selectedBook._id);
+
       setAddSuccess(true);
       navigate("/library", { state: { justAdded: true } });
     } catch (error) {
@@ -63,6 +64,7 @@ function RecommendedPage() {
       try {
         const data = await getOwnBooks(token);
         const books = data.results || data;
+
         setLibraryBooks(books);
       } catch (error) {
         console.error(error);
@@ -121,7 +123,6 @@ function RecommendedPage() {
                 onClick={() => {
                   setSelectedBook(s);
                   setAddSuccess(false);
-                  console.log("RECOMMENDED BOOK:", s);
                 }}
                 className={style.rec_card}
                 key={s._id}

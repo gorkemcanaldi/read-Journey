@@ -4,12 +4,14 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice.js";
 import Logo from "../../icons/Logo.jsx";
 import style from "./Header.module.css";
+import { logoutUser } from "../../api/services.js";
+import toast from "react-hot-toast";
 
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, loading } = useSelector((e) => e.auth);
+  const { user, loading, token } = useSelector((e) => e.auth);
   if (loading) return null;
   const firstLetter = user?.name?.[0]?.toUpperCase() || "";
   const fullName = user?.name?.toUpperCase() || "";
@@ -17,8 +19,14 @@ function Header() {
   if (location.pathname === "/login" || location.pathname === "/register")
     return null;
   const handleLogout = async () => {
-    dispatch(logout());
-    navigate("/login");
+    try {
+      await logoutUser(token);
+      dispatch(logout());
+      toast.success("çıkış yapıldı.");
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error.message);
+    }
   };
 
   return (
