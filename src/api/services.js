@@ -158,3 +158,49 @@ export const addNewBook = async (token, bookData) => {
   }
   return data;
 };
+
+export const startReadingBook = async (token, id, page) => {
+  const res = await fetch(`${BASE_URL}/books/reading/start`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ id, page }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data?.message || "Failed book reading start");
+  }
+  return data;
+};
+export const finishReadingBook = async (token, id, page) => {
+  const res = await fetch(`${BASE_URL}/books/reading/finish`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ id, page }),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data?.message || "Failed book reading stop");
+  }
+  return data;
+};
+
+export const getBookId = async (token, id) => {
+  const res = await fetch(`${BASE_URL}/books/${id}`, {
+    headers: {
+      "Content-type": "aplication/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = res.json();
+  if (!res.ok) {
+    throw new Error(data?.message || "Failed to get book");
+  }
+  return data;
+};

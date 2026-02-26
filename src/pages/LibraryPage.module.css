@@ -415,3 +415,90 @@ option {
 option:focus {
   color: #f9f9f9;
 }
+
+.img_div_m {
+  width: 153px;
+  height: 233px;
+  margin-bottom: 16px;
+}
+
+.m_title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #f9f9f9;
+  margin-top: 6px;
+}
+.m_author {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #686868;
+}
+
+.m_totalPages {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  text-align: center;
+}
+
+.m_close_div {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 16px;
+  padding-top: 16px;
+}
+
+.m_close {
+  cursor: pointer;
+  background: #1f1f1f;
+  color: #f9f9f9;
+  border: none;
+  font-size: 22px;
+  transform: border 0.4s ease;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+}
+
+.m_close:hover {
+  border: 1px solid rgba(249, 249, 249, 0.2);
+}
+.des_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 32px;
+}
+.lib_nav {
+  width: 162px;
+  height: 46px;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 113%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+  background-color: #1f1f1f;
+  transition: background-color 0.4s ease;
+  cursor: pointer;
+}
+.lib_nav:hover {
+  background-color: #f9f9f9;
+  color: #1f1f1f;
+}
+
+.rec_divv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

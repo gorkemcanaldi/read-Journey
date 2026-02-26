@@ -22,7 +22,7 @@ function LibraryPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-
+  const [selectedBook, setSelectedBook] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -193,16 +193,20 @@ function LibraryPage() {
             <div className={style.book_div}>
               <img className={style.book_img} src="/book.png" alt="books" />
               <span className={style.lib_books_span}>
-                To start training, add{" "}
+                To start training, add
                 <span className={style.lib_books_spann}>
                   some of your books
-                </span>{" "}
+                </span>
                 or from the recommended ones
               </span>
             </div>
           ) : (
             myBooks.map((book) => (
-              <div key={book._id} className={style.rec_card}>
+              <div
+                key={book._id}
+                onClick={() => setSelectedBook(book)}
+                className={style.rec_card}
+              >
                 <img
                   className={style.img_div}
                   src={book.imageUrl}
@@ -215,7 +219,10 @@ function LibraryPage() {
                   </div>
                   <div
                     className={style.rub_div}
-                    onClick={() => handleRemove(book._id)}
+                    onClick={(e) => {
+                      handleRemove(book._id);
+                      e.stopPropagation();
+                    }}
                   >
                     <Rubbish />
                   </div>
@@ -249,6 +256,43 @@ function LibraryPage() {
                 </span>
               </div>
             </div>
+          </div>
+        </Modal>
+      )}
+
+      {selectedBook && (
+        <Modal isOpen={!!selectedBook} onClose={() => setSelectedBook(null)}>
+          <div className={style.m_close_div}>
+            <button
+              className={style.m_close}
+              onClick={() => setSelectedBook(null)}
+            >
+              X
+            </button>
+          </div>
+          <div className={style.rec_divv}>
+            <img
+              className={style.img_div_m}
+              src={selectedBook.imageUrl}
+              alt={selectedBook.title}
+            />
+
+            <div className={style.des_div}>
+              <span className={style.m_title}>{selectedBook.title}</span>
+              <span className={style.m_author}>{selectedBook.author}</span>
+              <span className={style.m_totalPages}>
+                {selectedBook.totalPages} pages
+              </span>
+            </div>
+
+            <button
+              onClick={() => {
+                navigate("/reading", { state: { bookId: selectedBook._id } });
+              }}
+              className={style.lib_nav}
+            >
+              Start reading
+            </button>
           </div>
         </Modal>
       )}
