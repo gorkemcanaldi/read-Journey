@@ -106,6 +106,9 @@ header {
   display: flex;
   align-items: center;
 }
+.burger {
+  display: none;
+}
 
 .name {
   font-weight: 700;
@@ -124,6 +127,9 @@ header {
   .headerr {
     min-width: 303px;
     height: 57px;
+  }
+  .burger {
+    display: flex;
   }
 
   .head {
@@ -156,5 +162,23 @@ header {
 
   .mobile_menu.open {
     transform: translateX(0);
+  }
+}
+
+@media (max-width: 1439px) {
+  .headerr {
+    max-width: 672px;
+  }
+  .head {
+    display: none;
+  }
+  .name {
+    display: none;
+  }
+  .mobile_menu {
+    display: none;
+  }
+  .burger {
+    display: none;
   }
 }

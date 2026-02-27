@@ -1,6 +1,6 @@
 .filters {
   border-radius: 30px;
-  width: 353px;
+  min-width: 353px;
   height: 651px;
   gap: 20px;
   display: flex;
@@ -201,4 +201,19 @@
 
 .b_span {
   color: #f9f9f9;
+}
+
+@media (max-width: 1439px) {
+  .filters {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 29px;
+    max-width: 704px;
+    height: 336px;
+  }
+
+  .books_div {
+    display: none;
+  }
 }

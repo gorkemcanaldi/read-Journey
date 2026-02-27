@@ -59,7 +59,9 @@ function Header() {
         </div>
         <div className={style.header_right}>
           <div className={style.profile}>{firstLetter}</div>
-          <BurgerMenu onClick={() => setMenuOpen(true)} />
+          <div className={style.burger}>
+            <BurgerMenu onClick={() => setMenuOpen(true)} />
+          </div>
           <span className={style.name}>{fullName}</span>
           <button onClick={handleLogout} className={style.logout} type="button">
             Log out
