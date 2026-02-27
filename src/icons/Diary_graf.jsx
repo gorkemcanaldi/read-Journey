@@ -12,7 +12,7 @@ function Diary_graf() {
       <path
         d="M59.563 1L0.563034 9.42108V25H59.563V1Z"
         fill="#30B94D"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <rect
         width="60"

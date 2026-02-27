@@ -42,8 +42,13 @@
   color: #f9f9f9;
   margin-right: 220px;
 }
+.read_div {
+  margin-top: 30px;
+  width: 313px;
+}
 
 .start_pag_span {
+  margin-left: 14px;
   font-weight: 500;
   font-size: 14px;
   line-height: 129%;
@@ -188,4 +193,62 @@
   line-height: 100%;
   letter-spacing: -0.02em;
   color: #f9f9f9;
+}
+
+.book_div {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.b {
+  width: 68px;
+  height: 70px;
+}
+
+.book_ {
+  width: 242px;
+}
+.book_p {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #f9f9f9;
+}
+.book_span {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #686868;
+}
+.book_spann {
+  color: #f9f9f9;
+}
+.m_close_book {
+  cursor: pointer;
+  background: #1f1f1f;
+  color: #f9f9f9;
+  border: none;
+  font-size: 22px;
+  transform: border 0.4s ease;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+.m_close_book:hover {
+  border: 1px solid rgba(249, 249, 249, 0.2);
+}
+.book_modal {
+  display: flex;
+  flex-direction: row-reverse;
 }

@@ -21,7 +21,11 @@ function Modal({ isOpen, onClose, children, variant = "default" }) {
       <div
         onClick={(e) => e.stopPropagation()}
         className={`${style.modal_content} ${
-          variant === "success" ? style.modal_success : ""
+          variant === "success"
+            ? style.modal_success
+            : variant === "book"
+              ? style.modal_book
+              : ""
         }`}
       >
         {children}

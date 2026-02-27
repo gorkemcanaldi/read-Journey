@@ -204,3 +204,24 @@ export const getBookId = async (token, id) => {
   }
   return data;
 };
+
+export const deleteReadBook = async (token, id, readingId) => {
+  const res = await fetch(
+    `${BASE_URL}/books/reading?bookId=${id}&readingId=${readingId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to delete reading");
+  }
+
+  return data;
+};

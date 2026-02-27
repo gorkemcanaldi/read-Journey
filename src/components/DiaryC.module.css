@@ -10,6 +10,7 @@
   background: #262626;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  position: relative;
 }
 .diary_::-webkit-scrollbar {
   display: none;
@@ -25,7 +26,8 @@
 
 .day_square {
   display: flex;
-  gap: 10px;
+  z-index: 1;
+  justify-content: space-between;
   font-weight: 700;
   font-size: 16px;
   line-height: 113%;
@@ -34,6 +36,7 @@
 }
 .date_span {
   margin-top: 3px;
+  margin-left: 10px;
 }
 
 .page_span {
@@ -103,4 +106,16 @@
   letter-spacing: -0.02em;
   text-align: center;
   color: #686868;
+}
+
+.line {
+  position: fixed;
+  left: 17.8%;
+  width: 3px;
+  height: 320px;
+
+  overflow: scroll;
+  background: #1f1f1f;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }

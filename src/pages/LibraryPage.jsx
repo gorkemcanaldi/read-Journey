@@ -23,11 +23,29 @@ function LibraryPage() {
   const [error, setError] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [filter, setFilter] = useState("allBooks");
+
   const [formData, setFormData] = useState({
     title: "",
     author: "",
     totalPages: "",
   });
+  console.log(myBooks);
+
+  const filteredBooks = filter
+    ? myBooks.filter((book) => {
+        switch (filter) {
+          case "unread":
+            return book.status === "unread";
+          case "in-progress":
+            return book.status === "in-progress";
+          case "done":
+            return book.status === "done";
+          default:
+            return true;
+        }
+      })
+    : myBooks;
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -180,28 +198,29 @@ function LibraryPage() {
       <div className={style.lib_right}>
         <div className={style.lib_filter}>
           <p className={style.rec_tit}>My library</p>
-          <select id="cars" name="cars">
+          <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+            <option value="">All books</option>
             <option value="unread">Unread</option>
-            <option value="ınprogress">In progress</option>
+            <option value="in-progress">In progress</option>
             <option value="done">Done</option>
-            <option value="allBooks">All books</option>
           </select>
         </div>
 
         <div className={style.card}>
-          {myBooks.length === 0 ? (
+          {filteredBooks.length === 0 ? (
             <div className={style.book_div}>
               <img className={style.book_img} src="/book.png" alt="books" />
               <span className={style.lib_books_span}>
                 To start training, add
                 <span className={style.lib_books_spann}>
+                  {" "}
                   some of your books
                 </span>
                 or from the recommended ones
               </span>
             </div>
           ) : (
-            myBooks.map((book) => (
+            filteredBooks.map((book) => (
               <div
                 key={book._id}
                 onClick={() => setSelectedBook(book)}

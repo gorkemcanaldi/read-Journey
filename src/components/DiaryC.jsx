@@ -3,12 +3,31 @@ import style from "./DiaryC.module.css";
 import Square from "../icons/Square";
 import Diary_graf from "../icons/Diary_graf";
 import Rubbish_read from "../icons/Rubbish_read";
+import { useSelector } from "react-redux";
+import { deleteReadBook } from "../api/services";
+import toast from "react-hot-toast";
 
-function DiaryC({ book }) {
+function DiaryC({ book, updateBook }) {
+  const { token } = useSelector((e) => e.auth);
+
+  const handleDelete = async (readingId) => {
+    try {
+      await deleteReadBook(token, book._id, readingId);
+      const updatedProgress = book.progress.filter((p) => p._id !== readingId);
+      const updatedBook = { ...book, progress: updatedProgress };
+      updateBook(updatedBook); // ReadingPage state güncelleniyor
+      toast.success("Reading deleted");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const groupedByDay = book.progress.reduce((acc, p) => {
     const d = new Date(p.startReading);
-    const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-
+    const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
+      2,
+      "0",
+    )}-${String(d.getDate()).padStart(2, "0")}`;
     if (!acc[day]) acc[day] = [];
     acc[day].push(p);
     return acc;
@@ -16,6 +35,8 @@ function DiaryC({ book }) {
 
   return (
     <div className={style.diary_}>
+      <div className={style.line}></div>
+
       {Object.entries(groupedByDay).map(([day, sessions]) => {
         const totalPages = sessions.reduce(
           (sum, s) => sum + (s.finishPage - s.startPage + 1),
@@ -25,29 +46,31 @@ function DiaryC({ book }) {
         return (
           <div key={day} className={style.diary_day}>
             <div className={style.day_square}>
-              <Square />
-              <span className={style.date_span}>{day}</span>
+              <div className={style.day_square}>
+                <Square />
+                <span className={style.date_span}>{day}</span>
+              </div>
+              <span className={style.page_span__}>Pages: {totalPages}</span>
             </div>
-            <span className={style.page_span__}>Pages: {totalPages}</span>
 
             {sessions.map((s) => {
               const pagesRead = s.finishPage - s.startPage + 1;
               const totalMinutes =
                 (new Date(s.finishReading) - new Date(s.startReading)) / 60000;
+              const pagesPerHour =
+                totalMinutes > 0
+                  ? Math.round((pagesRead / totalMinutes) * 60)
+                  : pagesRead;
               const percentage = ((pagesRead / book.totalPages) * 100).toFixed(
                 2,
               );
-              const pagesPerHour =
-                totalMinutes > 0
-                  ? Math.round(pagesRead / (totalMinutes / 60))
-                  : 0;
 
               return (
                 <div className={style.diary} key={s._id}>
                   <div className={style.diary_gr}>
                     <div className={style.diary_min}>
                       <span className={style.page_span__}>
-                        {Math.round(totalMinutes)} minutes
+                        {pagesRead} pages
                       </span>
                       <span className={style.rec_span}>{percentage}%</span>
                     </div>
@@ -59,7 +82,10 @@ function DiaryC({ book }) {
                           {pagesPerHour} pages per hour
                         </p>
                       </div>
-                      <button className={style.diary_Del}>
+                      <button
+                        onClick={() => handleDelete(s._id)}
+                        className={style.diary_Del}
+                      >
                         <Rubbish_read />
                       </button>
                     </div>
