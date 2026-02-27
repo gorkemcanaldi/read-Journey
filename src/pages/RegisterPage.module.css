@@ -12,7 +12,9 @@
 
 .form_button {
   border-radius: 30px;
-  padding: 16px 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 225px;
   height: 52px;
   background: #f9f9f9;
@@ -43,7 +45,7 @@
 .register {
   display: flex;
   flex-direction: column;
-  width: 536px;
+  max-width: 536px;
   height: 729px;
   padding-left: 64px;
   padding-top: 40px;
@@ -73,7 +75,7 @@
 
 .input_group {
   position: relative;
-  width: 400px;
+  max-width: 400px;
   height: 48px;
 }
 
@@ -229,10 +231,12 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  height: 50px;
 }
 
 .div_left_right {
   display: flex;
+  gap: 16px;
   justify-content: center;
   align-items: center;
 }
@@ -241,16 +245,88 @@
   display: flex;
   flex-direction: column;
   width: 505px;
-  height: 699px;
-  padding-left: 95px;
-  padding-top: 80px;
+  height: 769px;
+  align-items: center;
+  justify-content: flex-end;
   background: #1f1f1f;
   border-radius: 30px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  margin-left: 32px;
 }
 .phone {
   width: 405px;
-  height: 834px;
+}
+
+@media (max-width: 767px) {
+  .head {
+    display: none;
+  }
+  .div_left_right {
+    flex-direction: column;
+    align-items: center;
+  }
+  .register {
+    width: 315px;
+    height: 440px;
+    padding-left: 20px;
+  }
+  .form {
+    margin-top: 20px;
+  }
+
+  .regis_h1 {
+    width: 295px;
+    height: 64px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0.02em;
+    color: #f9f9f9;
+  }
+  .regis_sp {
+    color: rgba(227, 227, 227, 0.5);
+  }
+  .form_input {
+    width: 71%;
+  }
+  .input_group {
+    height: 42px;
+  }
+  .input_group {
+    height: 42px;
+  }
+
+  .form_input2 {
+    width: 40%;
+    height: 40px !important;
+  }
+  .iconContainer {
+    position: absolute;
+    right: 190px;
+  }
+  .form_button {
+    width: 140px;
+    height: 42px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 129%;
+    letter-spacing: 0.02em;
+    color: #1f1f1f;
+  }
+  .navs {
+    height: 42px;
+  }
+  .register_right {
+    margin-left: 32px;
+    width: 335px;
+    height: 351px;
+  }
+  .phone {
+    width: 255px;
+    height: 331px;
+  }
+}
+
+@media (max-width: 1439px) {
+  .register_right {
+    display: none;
+  }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authSlice.js";
@@ -6,12 +6,14 @@ import Logo from "../../icons/Logo.jsx";
 import style from "./Header.module.css";
 import { logoutUser } from "../../api/services.js";
 import toast from "react-hot-toast";
+import BurgerMenu from "../../icons/BurgerMenu.jsx";
 
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { user, loading, token } = useSelector((e) => e.auth);
+  const [menuOpen, setMenuOpen] = useState(false);
   if (loading) return null;
   const firstLetter = user?.name?.[0]?.toUpperCase() || "";
   const fullName = user?.name?.toUpperCase() || "";
@@ -57,10 +59,26 @@ function Header() {
         </div>
         <div className={style.header_right}>
           <div className={style.profile}>{firstLetter}</div>
+          <BurgerMenu onClick={() => setMenuOpen(true)} />
           <span className={style.name}>{fullName}</span>
           <button onClick={handleLogout} className={style.logout} type="button">
             Log out
           </button>
+        </div>
+        <div className={`${style.mobile_menu} ${menuOpen ? style.open : ""}`}>
+          <div className={style.mobile_header}>
+            <button onClick={() => setMenuOpen(false)}>✕</button>
+          </div>
+
+          <NavLink to="/recommended" onClick={() => setMenuOpen(false)}>
+            Home
+          </NavLink>
+
+          <NavLink to="/library" onClick={() => setMenuOpen(false)}>
+            My Library
+          </NavLink>
+
+          <button onClick={handleLogout}>Log out</button>
         </div>
       </div>
     </header>

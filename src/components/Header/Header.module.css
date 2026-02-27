@@ -116,3 +116,45 @@ header {
   color: #f9f9f9;
   margin-right: 16px;
 }
+.mobile_menu {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .headerr {
+    min-width: 303px;
+    height: 57px;
+  }
+
+  .head {
+    display: none;
+  }
+  .name {
+    display: none;
+  }
+  .logout {
+    display: none;
+  }
+  .nav_div {
+    display: none;
+  }
+  .mobile_menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
+    background: #111;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mobile_menu.open {
+    transform: translateX(0);
+  }
+}
