@@ -1,10 +1,10 @@
 import React from "react";
 import style from "./DiaryC.module.css";
-import Square from "../icons/Square";
-import Diary_graf from "../icons/Diary_graf";
-import Rubbish_read from "../icons/Rubbish_read";
+import Square from "../../icons/Square";
+import Diary_graf from "../../icons/Diary_graf";
+import Rubbish_read from "../../icons/Rubbish_read";
 import { useSelector } from "react-redux";
-import { deleteReadBook } from "../api/services";
+import { deleteReadBook } from "../../api/services";
 import toast from "react-hot-toast";
 
 function DiaryC({ book, updateBook }) {
@@ -15,7 +15,7 @@ function DiaryC({ book, updateBook }) {
       await deleteReadBook(token, book._id, readingId);
       const updatedProgress = book.progress.filter((p) => p._id !== readingId);
       const updatedBook = { ...book, progress: updatedProgress };
-      updateBook(updatedBook); // ReadingPage state güncelleniyor
+      updateBook(updatedBook);
       toast.success("Reading deleted");
     } catch (error) {
       toast.error(error.message);

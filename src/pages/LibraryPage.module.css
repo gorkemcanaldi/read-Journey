@@ -220,6 +220,21 @@
   padding: 0px 40px;
 }
 
+.lib_filter select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  padding: 8px 32px 8px 16px;
+  outline: none;
+}
+.custom_arrow {
+  position: absolute;
+  right: 410px;
+  top: 155px;
+  cursor: pointer;
+}
+
 .img_div {
   width: 137px;
   height: 208px;

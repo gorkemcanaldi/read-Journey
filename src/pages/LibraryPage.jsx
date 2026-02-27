@@ -12,6 +12,8 @@ import Back from "../icons/Back";
 import Rubbish from "../icons/rubbish";
 import Modal from "../components/Modal/Modal";
 import toast from "react-hot-toast";
+import Select from "../icons/select";
+import Select_ from "../icons/select_";
 
 function LibraryPage() {
   const { token } = useSelector((s) => s.auth);
@@ -24,7 +26,7 @@ function LibraryPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [filter, setFilter] = useState("allBooks");
-
+  const [isOpens, setIsOpens] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -198,12 +200,22 @@ function LibraryPage() {
       <div className={style.lib_right}>
         <div className={style.lib_filter}>
           <p className={style.rec_tit}>My library</p>
-          <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+          <select
+            value={filter}
+            onClick={() => setIsOpens(!isOpens)}
+            onChange={(e) => setFilter(e.target.value)}
+          >
             <option value="">All books</option>
             <option value="unread">Unread</option>
             <option value="in-progress">In progress</option>
             <option value="done">Done</option>
           </select>
+          <span
+            onClick={() => setIsOpens(!isOpens)}
+            className={style.custom_arrow}
+          >
+            {isOpens ? <Select /> : <Select_ />}
+          </span>
         </div>
 
         <div className={style.card}>
