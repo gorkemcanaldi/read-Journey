@@ -22,7 +22,6 @@ function LibraryPage() {
   const [books, setBooks] = useState([]);
   const [myBooks, setMyBooks] = useState([]);
   const navigate = useNavigate();
-  const [error, setError] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [filter, setFilter] = useState("allBooks");
@@ -32,7 +31,6 @@ function LibraryPage() {
     author: "",
     totalPages: "",
   });
-  console.log(myBooks);
 
   const filteredBooks = filter
     ? myBooks.filter((book) => {
@@ -58,7 +56,7 @@ function LibraryPage() {
         });
         setBooks(data.results);
       } catch (error) {
-        console.log(error);
+        toast.error(error.message);
       }
     };
     if (token) {
@@ -72,7 +70,7 @@ function LibraryPage() {
         const data = await getOwnBooks(token);
         setMyBooks(data.results || data);
       } catch (error) {
-        console.log(error);
+        toast.error(error.message);
       }
     };
     if (token) {
@@ -86,7 +84,7 @@ function LibraryPage() {
       setMyBooks((d) => d.filter((b) => b._id !== data.id));
       toast.success("You deleted book");
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
   useEffect(() => {
@@ -99,7 +97,6 @@ function LibraryPage() {
 
   const handleNewBooks = async (e) => {
     e.preventDefault();
-    setError("");
     const payload = {
       title: formData.title.trim(),
       author: formData.author.trim(),
@@ -115,7 +112,7 @@ function LibraryPage() {
         totalPages: "",
       });
     } catch (error) {
-      setError(error.message);
+      toast.error(error.message);
     }
   };
 

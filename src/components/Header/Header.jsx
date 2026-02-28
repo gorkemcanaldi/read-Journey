@@ -27,7 +27,7 @@ function Header() {
       toast.success("çıkış yapıldı.");
       navigate("/login");
     } catch (error) {
-      console.error("Logout failed:", error.message);
+      toast.error("Logout failed:", error.message);
     }
   };
 

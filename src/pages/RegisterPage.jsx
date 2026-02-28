@@ -40,7 +40,6 @@ function RegisterPage() {
       navigate("/recommended");
       localStorage.setItem("token", data.token);
       localStorage.setItem("refreshToken", data.refreshToken);
-      console.log(data);
     } catch (error) {
       dispatch(setError(error.message));
       toast.error(error.message);

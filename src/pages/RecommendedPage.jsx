@@ -5,6 +5,7 @@ import style from "./RecommendedPage.module.css";
 import Filters from "../components/filters/Filters";
 import Modal from "../components/Modal/Modal";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function RecommendedPage() {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ function RecommendedPage() {
   const { token } = useSelector((s) => s.auth);
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedBook, setSelectedBook] = useState(null);
@@ -33,7 +33,7 @@ function RecommendedPage() {
       setAddSuccess(true);
       navigate("/library", { state: { justAdded: true } });
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
     }
   };
 
@@ -49,7 +49,7 @@ function RecommendedPage() {
         setBooks(data.results);
         setTotalPages(data.totalPages);
       } catch (error) {
-        setError(error.message);
+        toast.error(error.message);
       } finally {
         setLoading(false);
       }
@@ -67,7 +67,7 @@ function RecommendedPage() {
 
         setLibraryBooks(books);
       } catch (error) {
-        console.error(error);
+        toast.error(error.message);
       }
     };
 
@@ -77,7 +77,6 @@ function RecommendedPage() {
   }, [token]);
 
   if (loading) return;
-  if (error) return <p>Error: {error}</p>;
   const isAlreadyAdded =
     selectedBook &&
     libraryBooks.some(
