@@ -24,7 +24,7 @@ Read Journey is a modern web application for book enthusiasts. It helps you orga
 
 ## 🛠 Tech Stack
 
-- **React 19**  
+- **React 18**  
 - **React Router DOM**  
 - **Redux Toolkit**  
 - **React Hook Form**  
