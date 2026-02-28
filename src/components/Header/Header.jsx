@@ -59,29 +59,47 @@ function Header() {
         </div>
         <div className={style.header_right}>
           <div className={style.profile}>{firstLetter}</div>
-          <div className={style.burger}>
-            <BurgerMenu onClick={() => setMenuOpen(true)} />
+          <div onClick={() => setMenuOpen(true)} className={style.burger}>
+            <BurgerMenu />
           </div>
           <span className={style.name}>{fullName}</span>
           <button onClick={handleLogout} className={style.logout} type="button">
             Log out
           </button>
         </div>
-        <div className={`${style.mobile_menu} ${menuOpen ? style.open : ""}`}>
-          <div className={style.mobile_header}>
-            <button onClick={() => setMenuOpen(false)}>✕</button>
+        {window.innerWidth < 768 && (
+          <div className={`${style.mobile_menu} ${menuOpen ? style.open : ""}`}>
+            <div className={style.mobile_header}>
+              <button onClick={() => setMenuOpen(false)}>✕</button>
+            </div>
+
+            <NavLink
+              to="/recommended"
+              className={({ isActive }) =>
+                isActive ? `${style.nav_link} ${style.active}` : style.nav_link
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/library"
+              className={({ isActive }) =>
+                isActive ? `${style.nav_link} ${style.active}` : style.nav_link
+              }
+            >
+              My Library
+            </NavLink>
+
+            <button
+              className={style.logout}
+              type="button"
+              onClick={handleLogout}
+            >
+              Log out
+            </button>
           </div>
-
-          <NavLink to="/recommended" onClick={() => setMenuOpen(false)}>
-            Home
-          </NavLink>
-
-          <NavLink to="/library" onClick={() => setMenuOpen(false)}>
-            My Library
-          </NavLink>
-
-          <button onClick={handleLogout}>Log out</button>
-        </div>
+        )}
       </div>
     </header>
   );

@@ -119,53 +119,84 @@ header {
   color: #f9f9f9;
   margin-right: 16px;
 }
-.mobile_menu {
-  display: none;
-}
 
 @media (max-width: 767px) {
   .headerr {
     min-width: 303px;
     height: 57px;
   }
-  .burger {
-    display: flex;
+
+  .nav_div {
+    display: none;
+  }
+
+  .name {
+    display: none;
+  }
+
+  .header_right .logout {
+    display: none;
   }
 
   .head {
     display: none;
   }
-  .name {
-    display: none;
+
+  .burger {
+    display: flex;
+    cursor: pointer;
   }
-  .logout {
-    display: none;
-  }
-  .nav_div {
-    display: none;
-  }
+
   .mobile_menu {
     position: fixed;
     top: 0;
     right: 0;
     width: 50vw;
     height: 100vh;
-    background: #111;
+    background: #262626;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     z-index: 999;
-    padding: 40px 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
   }
 
-  .mobile_menu.open {
+  .open {
     transform: translateX(0);
+  }
+
+  .mobile_menu .nav_link {
+    font-size: 20px;
+    color: #f9f9f9;
+    position: relative;
+    top: 40%;
+  }
+
+  .mobile_menu .logout {
+    display: block;
+    margin-top: auto;
+    margin-bottom: 40px;
+  }
+
+  .mobile_header {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .mobile_header button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
   }
 }
 
-@media (max-width: 1439px) {
+@media (min-width: 768px) and (max-width: 1439px) {
   .headerr {
     max-width: 672px;
   }
@@ -173,12 +204,6 @@ header {
     display: none;
   }
   .name {
-    display: none;
-  }
-  .mobile_menu {
-    display: none;
-  }
-  .burger {
     display: none;
   }
 }
