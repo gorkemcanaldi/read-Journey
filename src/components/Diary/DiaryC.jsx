@@ -13,9 +13,11 @@ function DiaryC({ book, updateBook }) {
   const handleDelete = async (readingId) => {
     try {
       await deleteReadBook(token, book._id, readingId);
+
       const updatedProgress = book.progress.filter((p) => p._id !== readingId);
-      const updatedBook = { ...book, progress: updatedProgress };
-      updateBook(updatedBook);
+
+      updateBook({ ...book, progress: updatedProgress });
+
       toast.success("Reading deleted");
     } catch (error) {
       toast.error(error.message);
@@ -24,12 +26,15 @@ function DiaryC({ book, updateBook }) {
 
   const groupedByDay = book.progress.reduce((acc, p) => {
     const d = new Date(p.startReading);
+
     const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
       2,
       "0",
     )}-${String(d.getDate()).padStart(2, "0")}`;
+
     if (!acc[day]) acc[day] = [];
     acc[day].push(p);
+
     return acc;
   }, {});
 
@@ -50,17 +55,16 @@ function DiaryC({ book, updateBook }) {
                 <Square />
                 <span className={style.date_span}>{day}</span>
               </div>
-              <span className={style.page_span__}>Pages: {totalPages}</span>
+              <span className={style.page_span__}>{totalPages} pages</span>
             </div>
 
             {sessions.map((s) => {
               const pagesRead = s.finishPage - s.startPage + 1;
-              const totalMinutes =
-                (new Date(s.finishReading) - new Date(s.startReading)) / 60000;
-              const pagesPerHour =
-                totalMinutes > 0
-                  ? Math.round((pagesRead / totalMinutes) * 60)
-                  : pagesRead;
+
+              const totalMinutes = Math.round(
+                (new Date(s.finishReading) - new Date(s.startReading)) / 60000,
+              );
+
               const percentage = ((pagesRead / book.totalPages) * 100).toFixed(
                 2,
               );
@@ -70,7 +74,7 @@ function DiaryC({ book, updateBook }) {
                   <div className={style.diary_gr}>
                     <div className={style.diary_min}>
                       <span className={style.page_span__}>
-                        {pagesRead} pages
+                        {totalMinutes} minutes
                       </span>
                       <span className={style.rec_span}>{percentage}%</span>
                     </div>
@@ -79,9 +83,10 @@ function DiaryC({ book, updateBook }) {
                       <div className={style.diary_per}>
                         <Diary_graf />
                         <p className={style.page_span_}>
-                          {pagesPerHour} pages per hour
+                          {s.speed} pages per hour
                         </p>
                       </div>
+
                       <button
                         onClick={() => handleDelete(s._id)}
                         className={style.diary_Del}

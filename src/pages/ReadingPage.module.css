@@ -6,11 +6,10 @@
 
 .left_reading {
   border-radius: 30px;
-  width: 353px;
-  height: 651px;
+  min-width: 353px;
   display: flex;
   flex-direction: column;
-
+  padding-bottom: 20px;
   align-items: center;
   background: #1f1f1f;
 }
@@ -139,6 +138,7 @@
 .img_ {
   width: 224px;
   height: 340px;
+  border-radius: 8px;
 }
 .rec_right_span {
   font-weight: 700;
@@ -147,6 +147,7 @@
   letter-spacing: -0.02em;
   color: #f9f9f9;
   margin-top: 25px;
+  text-align: center;
 }
 
 .rec_right_span_ {
@@ -251,4 +252,34 @@
 .book_modal {
   display: flex;
   flex-direction: row-reverse;
+}
+
+@media (max-width: 1439px) {
+  .reading {
+    flex-direction: column;
+    align-items: center;
+  }
+  .left_reading {
+    max-width: 704px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 0 20px;
+  }
+  .di_st_div {
+    display: flex;
+  }
+  .star {
+    margin-bottom: 40px;
+  }
+  .right_reading {
+    max-width: 704px;
+  }
+
+  .read_head {
+    margin-right: 460px;
+  }
+  .rec_right_span {
+    margin-bottom: 4px;
+  }
 }

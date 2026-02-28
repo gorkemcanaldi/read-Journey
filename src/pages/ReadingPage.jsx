@@ -176,7 +176,7 @@ function ReadingPage() {
               <div>
                 <span className={style.reading_head}>{activeComponent}</span>
               </div>
-              <div>
+              <div className={style.di_st_div}>
                 <button
                   className={style.diary_button}
                   onClick={() => setActiveComponent("Diary")}

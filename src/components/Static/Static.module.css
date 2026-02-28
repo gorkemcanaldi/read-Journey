@@ -3,9 +3,11 @@
   flex-direction: column;
   align-items: center;
   border-radius: 12px;
-  width: 273px;
-  height: 281px;
+  min-width: 313px;
+  max-height: 281px;
+
   background: #262626;
+  padding-bottom: 15px;
 }
 .stat_div {
   display: flex;
@@ -68,4 +70,13 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
+}
+
+@media (max-width: 1439px) {
+  .stat_span {
+    display: none;
+  }
+  .stat_div {
+    margin-bottom: 30px;
+  }
 }

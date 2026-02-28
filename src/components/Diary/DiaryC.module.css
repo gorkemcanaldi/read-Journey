@@ -4,7 +4,7 @@
   gap: 10px;
   padding: 20px;
   border-radius: 12px;
-  width: 273px;
+  min-width: 273px;
   height: 333px;
   overflow: scroll;
   background: #262626;
@@ -109,8 +109,8 @@
 }
 
 .line {
-  position: fixed;
-  left: 17.8%;
+  position: absolute;
+  left: 9.2%;
   width: 3px;
   height: 320px;
 
@@ -118,4 +118,11 @@
   background: #1f1f1f;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+@media (max-width: 1439px) {
+  .diary_ {
+    margin-bottom: 30px;
+    max-height: 241px;
+  }
 }
