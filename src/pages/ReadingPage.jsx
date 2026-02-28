@@ -10,8 +10,8 @@ import {
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
-import RecStart from "../icons/recStart";
-import RecStop from "../icons/recStop";
+import RecStart from "../icons/RecStart";
+import RecStop from "../icons/RecStop";
 import DiaryC from "../components/Diary/DiaryC";
 import Static from "../components/Static/Static";
 import Modal from "../components/Modal/Modal";

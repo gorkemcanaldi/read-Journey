@@ -12,8 +12,8 @@ import Back from "../icons/Back";
 import Rubbish from "../icons/Rubbish";
 import Modal from "../components/Modal/Modal";
 import toast from "react-hot-toast";
-import Select from "../icons/select";
-import Select_ from "../icons/select_";
+import Select from "../icons/Select";
+import Select_ from "../icons/Select_";
 
 function LibraryPage() {
   const { token } = useSelector((s) => s.auth);
