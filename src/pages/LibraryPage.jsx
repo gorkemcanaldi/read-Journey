@@ -9,7 +9,7 @@ import {
 } from "../api/services";
 import { useSelector } from "react-redux";
 import Back from "../icons/Back";
-import Rubbish from "../icons/rubbish";
+import Rubbish from "../icons/Rubbish";
 import Modal from "../components/Modal/Modal";
 import toast from "react-hot-toast";
 import Select from "../icons/select";
