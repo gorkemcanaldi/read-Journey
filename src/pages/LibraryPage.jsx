@@ -210,10 +210,7 @@ function LibraryPage() {
             <option value="in-progress">In progress</option>
             <option value="done">Done</option>
           </select>
-          <span
-            onClick={() => setIsOpens(!isOpens)}
-            className={style.custom_arrow}
-          >
+          <span className={style.custom_arrow}>
             {isOpens ? <Select /> : <Select_ />}
           </span>
         </div>
@@ -225,7 +222,6 @@ function LibraryPage() {
               <span className={style.lib_books_span}>
                 To start training, add
                 <span className={style.lib_books_spann}>
-                  {" "}
                   some of your books
                 </span>
                 or from the recommended ones

@@ -7,7 +7,6 @@
 .filters {
   border-radius: 30px;
   max-width: 353px;
-  max-height: 651px;
   padding: 20px;
   gap: 20px;
   display: flex;
@@ -20,7 +19,6 @@
   display: flex;
   flex-direction: column;
   width: 847px;
-  height: 651px;
   background-color: #1f1f1f;
   border-radius: 30px;
 }
@@ -219,6 +217,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0px 40px;
+  position: relative;
 }
 
 .lib_filter select {
@@ -231,8 +230,9 @@
 }
 .custom_arrow {
   position: absolute;
-  right: 410px;
-  top: 155px;
+  top: 39%;
+  left: 91.4%;
+  z-index: 111113333333;
   cursor: pointer;
 }
 
@@ -533,7 +533,32 @@ option:focus {
     max-width: 704px;
   }
   .custom_arrow {
-    right: 11.5%;
-    top: 72.5%;
+    position: absolute;
+    left: 90%;
+  }
+}
+
+@media (max-width: 767px) {
+  .filters {
+    flex-direction: column;
+    width: 316px;
+  }
+  .lib_right {
+    max-width: 374px;
+  }
+  .card {
+    flex-wrap: wrap;
+  }
+  .rec_tit {
+    font-size: 20px;
+    line-height: 100%;
+  }
+  .custom_arrow {
+    position: absolute;
+    top: 34%;
+    left: 81.4%;
+  }
+  .lib_filter {
+    margin-top: 30px;
   }
 }
